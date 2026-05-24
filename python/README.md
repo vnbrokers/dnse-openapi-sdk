@@ -20,10 +20,14 @@ signing, authentication, and communication details, allowing developers to focus
 and investment applications.
 
 ### Installation
-```
-cd dnse-openapi-sdk/python
-uv sync
-source .venv/bin/activate.bash 
+
+Using `pip`
+```bash
+
+pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@1.3.0#subdirectory=python
+
+## install latest version
+# pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@main#subdirectory=python
 
 ```
 
@@ -63,12 +67,11 @@ client.get_accounts(dry_run=True)
 
 ### Examples
 
-Run any example from the `sdk/python/examples` directory:
+Run any example from the `dnse-openapi-sdk/python` directory:
 
 bash/zsh/fish
 
 ```bash
-cd dnse-openapi-sdk/python
 
 export PYTHONPATH="."
 export DNSE_API_KEY="replace-with-api-key"
