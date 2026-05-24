@@ -70,6 +70,7 @@ bash/zsh/fish
 ```bash
 cd dnse-openapi-sdk/python
 
+export PYTHONPATH="."
 export DNSE_API_KEY="replace-with-api-key"
 export DNSE_API_SECRET="replace-with-api-secret"
 

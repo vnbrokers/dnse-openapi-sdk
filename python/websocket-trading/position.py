@@ -5,8 +5,11 @@ This example shows how to receive real-time position event for stock and derivat
 """
 
 import os
+import sys
 import asyncio
 from datetime import datetime
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from dnse import TradingClient
 from dnse.websocket.models import Position
@@ -36,7 +39,7 @@ async def main():
     await client.subscribe_position_event(market_type="STOCK",
                                           on_position_event=handle_position, encoding=encoding)
 
-    print("\nReceiving position event (will run for 1 hour)...\n")
+    print("\nReceiving position event (will run for 8 hour)...\n")
 
     # Run for 8H to collect data
     # In a real application, you might run indefinitely or until a specific condition

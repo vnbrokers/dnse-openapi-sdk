@@ -5,8 +5,11 @@ This example shows how to receive real-time order event for stock and derivative
 """
 
 import os
+import sys
 import asyncio
 from datetime import datetime
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from dnse import TradingClient
 from dnse.websocket.models import Order
@@ -36,7 +39,7 @@ async def main():
     await client.subscribe_order_event(market_type="STOCK",
                                        on_order_event=handle_order, encoding=encoding)
 
-    print("\nReceiving order event (will run for 1 hour)...\n")
+    print("\nReceiving order event (will run for 8 hour)...\n")
 
     # Run for 8H to collect data
     # In a real application, you might run indefinitely or until a specific condition
