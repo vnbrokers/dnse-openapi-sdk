@@ -9,8 +9,8 @@ from dnse import DNSEClient
 
 def main():
     client = DNSEClient(
-        api_key="replace-with-api-key",
-        api_secret="replace-with-api-secret",
+        api_key=os.getenv("DNSE_API_KEY"),
+        api_secret=os.getenv("DNSE_API_SECRET"),
         base_url="https://openapi.dnse.com.vn",
     )
 

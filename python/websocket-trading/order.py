@@ -4,6 +4,7 @@ Order event subscription example.
 This example shows how to receive real-time order event for stock and derivative orders
 """
 
+import os
 import asyncio
 from datetime import datetime
 
@@ -15,8 +16,8 @@ async def main():
     # Initialize client
     encoding = "json"  # json or msgpack
     client = TradingClient(
-        api_key="api-key",
-        api_secret="api-secret",
+        api_key=os.getenv("DNSE_API_KEY"),
+        api_secret=os.getenv("DNSE_API_SECRET"),
         base_url="wss://ws-openapi.dnse.com.vn",
         encoding=encoding,
     )

@@ -20,29 +20,29 @@ signing, authentication, and communication details, allowing developers to focus
 and investment applications.
 
 ### Installation
+```
+cd dnse-openapi-sdk/python
+uv sync
+source .venv/bin/activate.bash 
+
+```
+
 
 #### Requirements
 
 - Python 3.8+
-
-#### Install from PyPI
-
-```console
-pip install openapi-sdk 
-```
-
-Upgrade
 
 ### Usage
 
 Create a `DNSEClient` instance with your API credentials:
 
 ```python
+import os
 from dnse import DNSEClient
 
 client = DNSEClient(
-    api_key="your_api_key",
-    api_secret="your_api_secret",
+    api_key=os.getenv("DNSE_API_KEY"),
+    api_secret=os.getenv("DNSE_API_SECRET"),
     base_url="https://openapi.dnse.com.vn",
     api_version="2026-05-07",
 )
@@ -65,8 +65,24 @@ client.get_accounts(dry_run=True)
 
 Run any example from the `sdk/python/examples` directory:
 
+bash/zsh/fish
+
+```bash
+cd dnse-openapi-sdk/python
+
+export DNSE_API_KEY="replace-with-api-key"
+export DNSE_API_SECRET="replace-with-api-secret"
+
+python trading-api/get_accounts.py
 ```
-python sdk/python/api/get_accounts.py
+
+powershell
+
+```powershell
+$env:DNSE_API_KEY = "replace-with-api-key"
+$env:DNSE_API_SECRET = "replace-with-api-secret"
+
+python trading-api/get_accounts.py
 ```
 
 #### Trading API

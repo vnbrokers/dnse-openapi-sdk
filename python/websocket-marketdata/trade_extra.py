@@ -7,6 +7,7 @@ Demonstrates:
 This example shows how to receive real-time market data for multiple symbols.
 """
 
+import os
 import asyncio
 from datetime import datetime
 from dnse import TradingClient
@@ -17,8 +18,8 @@ async def main():
     # Initialize client
     encoding = "msgpack"  # json or msgpack
     client = TradingClient(
-        api_key="api-key",
-        api_secret="api-secret",
+        api_key=os.getenv("DNSE_API_KEY"),
+        api_secret=os.getenv("DNSE_API_SECRET"),
         base_url="wss://ws-openapi.dnse.com.vn",
         encoding=encoding,
     )
