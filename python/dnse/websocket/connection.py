@@ -72,8 +72,8 @@ class WebSocketConnection:
                 self._ws = await asyncio.wait_for(
                     websockets.connect(self.url,
                                        ssl=ssl_context,
-                                       ping_interval=30,
-                                       ping_timeout=30,
+                                       ping_interval=None,
+                                       ping_timeout=None,
                                        close_timeout=10,
                                        max_queue=512), timeout=self.timeout)
 
