@@ -72,8 +72,8 @@ class WebSocketConnection:
                 self._ws = await asyncio.wait_for(
                     websockets.connect(self.url,
                                        ssl=ssl_context,
-                                       ping_interval=None,
-                                       ping_timeout=None,
+                                       ping_interval=30, # Send a WebSocket PING frame to the server every < 180s to keep the connection alive.
+                                       ping_timeout=10,
                                        close_timeout=10,
                                        max_queue=512), timeout=self.timeout)
 

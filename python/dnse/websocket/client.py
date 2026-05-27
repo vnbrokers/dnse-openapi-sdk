@@ -613,7 +613,8 @@ class TradingClient:
         if action == "subscribed":
             logger.debug(f"Subscription confirmed: {data}")
         elif action == "ping":
-            logger.info("Received ping from server, sending pong")
+            latency = int(time.time() * 1000) - data.get('timestamp', 0)
+            logger.info(f"Received ping from server, sending pong, {latency}ms")
             await self._connection.send(self._encoder.encode({"action": "pong"}))
         elif action == "pong":
             self._last_pong_time = time.time()
