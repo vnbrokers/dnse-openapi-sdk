@@ -89,6 +89,20 @@ class DNSEClient {
     });
   }
 
+  getCorporateActionHistory(accountNo, { fromDate, toDate, dryRun = false } = {}) {
+    const query = {};
+    if (fromDate !== undefined) {
+      query.fromDate = fromDate;
+    }
+    if (toDate !== undefined) {
+      query.toDate = toDate;
+    }
+    return this.#request('GET', `/accounts/${accountNo}/corporate-action-history`, {
+      query,
+      dryRun,
+    });
+  }
+
   getPpse(accountNo, marketType, symbol, price, loanPackageId, { dryRun = false } = {}) {
     return this.#request('GET', `/accounts/${accountNo}/ppse`, {
       query: {

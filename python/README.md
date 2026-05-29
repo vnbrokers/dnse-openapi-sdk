@@ -55,7 +55,8 @@ status, body = client.get_accounts(dry_run=False)
 print(status, body)
 ```
 
-The SDK sends the API version in the `version` header. If `api_version` is omitted, it defaults to `2026-01-01`; it can also be set with the `DNSE_API_VERSION` environment variable.
+The SDK sends the API version in the `version` header. If `api_version` is omitted, it defaults to `2026-01-01`; it can also be set
+with the `DNSE_API_VERSION` environment variable.
 
 ### Dry Run
 
@@ -100,6 +101,7 @@ python trading-api/get_accounts.py
 | `get_orders.py`           | Demonstrates how to retrieve intraday order book.                                                                     |
 | `get_order_detail.py`     | Demonstrates how to retrieve detailed information of a specific order (by ID).                                        |
 | `get_order_history.py`    | Demonstrates how to retrieve historical orders.                                                                       |
+| `get_corporate_action_history.py` | Demonstrates how to retrieve corporate action history.                                                         |
 | `get_execution_detail.py` | Demonstrates how to retrieve detailed execution information of an order.                                              |
 | `get_positions.py`        | Demonstrates how to retrieve current holding positions.                                                               |
 | `get_positions_by_id.py`  | Demonstrates how to retrieve detailed information of a specific position (by ID).                                     |

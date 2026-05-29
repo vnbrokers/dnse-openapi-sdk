@@ -3,6 +3,10 @@ Order event subscription example.
 
 This example shows how to receive real-time order event for stock and derivative orders
 """
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import os
 import sys

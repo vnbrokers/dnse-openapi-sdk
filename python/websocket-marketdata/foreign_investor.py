@@ -4,6 +4,10 @@ Demonstrates:
 
 This example shows how to receive real-time foreigner trading data
 """
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import os
 import asyncio

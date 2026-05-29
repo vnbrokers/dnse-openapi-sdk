@@ -127,6 +127,34 @@ class DNSEClient:
             dry_run=dry_run,
         )
 
+    def get_corporate_action_history(
+            self,
+            account_no,
+            symbol=None,
+            ca_type=None,
+            ca_status=None,
+            page_index=None,
+            page_size=None,
+            dry_run=False,
+    ):
+        query = {}
+        if symbol is not None:
+            query["symbol"] = symbol
+        if ca_type is not None:
+            query["caType"] = ca_type
+        if ca_status is not None:
+            query["caStatus"] = ca_status
+        if page_index is not None:
+            query["pageIndex"] = page_index
+        if page_size is not None:
+            query["pageSize"] = page_size
+        return self._request(
+            "GET",
+            f"/accounts/{account_no}/corporate-action-history",
+            query=query if query else None,
+            dry_run=dry_run,
+        )
+
     def get_ppse(self, account_no, market_type, symbol, price, loan_package_id, dry_run=False):
         return self._request(
             "GET",
@@ -182,6 +210,27 @@ class DNSEClient:
             dry_run=dry_run,
         )
 
+    def get_quotes(self, symbol, board_id=None, from_date=None, to_date=None, limit=None, order = None, next_page_token=None, dry_run=False):
+        query = {}
+        if board_id is not None:
+            query["boardId"] = board_id
+        if from_date is not None:
+            query["from"] = from_date
+        if to_date is not None:
+            query["to"] = to_date
+        if limit is not None:
+            query["limit"] = limit
+        if order is not None:
+            query["order"] = order
+        if next_page_token is not None:
+            query["nextPageToken"] = next_page_token
+        return self._request(
+            "GET",
+            f"/price/{symbol}/quotes",
+            query=query if query else None,
+            dry_run=dry_run,
+        )
+
     def get_instruments(self, symbol=None, market_id=None, security_group_id=None, index_name=None, limit=None, page=None, dry_run=False):
         query = {}
         if symbol is not None:
@@ -210,6 +259,17 @@ class DNSEClient:
         return self._request(
             "GET",
             f"/price/{symbol}/trades/latest",
+            query=query if query else None,
+            dry_run=dry_run,
+        )
+
+    def get_latest_quote(self, symbol, board_id=None, dry_run=False):
+        query = {}
+        if board_id is not None:
+            query["boardId"] = board_id
+        return self._request(
+            "GET",
+            f"/price/{symbol}/quotes/latest",
             query=query if query else None,
             dry_run=dry_run,
         )

@@ -6,6 +6,10 @@ Demonstrates:
 
 This example shows how to receive real-time market data for multiple symbols.
 """
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import os
 import asyncio
