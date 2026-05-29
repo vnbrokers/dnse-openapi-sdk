@@ -15,7 +15,7 @@ def main():
     )
 
     status, body = client.get_execution_detail(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         order_id="66",
         market_type="DERIVATIVE",
         order_category="NORMAL",

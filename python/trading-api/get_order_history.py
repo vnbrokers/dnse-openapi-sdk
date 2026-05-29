@@ -15,7 +15,7 @@ def main():
     )
 
     status, body = client.get_order_history(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         market_type="STOCK",
         from_date="2025-12-01",
         to_date="2025-12-09",

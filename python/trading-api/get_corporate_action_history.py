@@ -7,13 +7,13 @@ from dnse import DNSEClient
 
 def main():
     client = DNSEClient(
-        api_key="replace-with-api-key",
-        api_secret="replace-with-api-secret",
-        base_url="https://openapi.dnse.com.vn",
+        api_key=os.getenv("DNSE_API_KEY"),
+        api_secret=os.getenv("DNSE_API_SECRET"),
+        base_url="https://openapi.dnse.com.vn"
     )
 
     status, body = client.get_corporate_action_history(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         symbol="SSI",
         ca_type="all",
         ca_status="pending",

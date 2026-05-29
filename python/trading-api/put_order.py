@@ -20,7 +20,7 @@ def main():
     }
 
     status, body = client.put_order(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         order_id="511",
         market_type="STOCK",
         payload=payload,

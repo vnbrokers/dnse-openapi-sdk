@@ -15,7 +15,7 @@ def main():
     )
 
     status, body = client.get_ppse(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         market_type="STOCK",
         symbol="HPG",
         price=26450,

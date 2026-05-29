@@ -15,7 +15,7 @@ def main():
     )
 
     status, body = client.get_positions(
-        account_no="0001000115",
+        account_no=os.getenv("DNSE_ACCOUNT_NO"),
         market_type="DERIVATIVE",
         dry_run=False,
     )

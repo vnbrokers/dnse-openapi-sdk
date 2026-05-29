@@ -14,7 +14,7 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    status, body = client.get_balances(account_no="0001000115", dry_run=False)
+    status, body = client.get_balances(account_no=os.getenv("DNSE_ACCOUNT_NO"), dry_run=False)
     print(status, body)
 
 
