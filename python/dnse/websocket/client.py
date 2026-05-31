@@ -666,9 +666,9 @@ class TradingClient:
     async def _heartbeat_loop(self) -> None:
         while self._is_running and self._connection and self._connection.is_connected:
             try:
-                ping_msg = self._encoder.encode({"action": "ping"})
-                await self._connection.send(ping_msg)
-                logger.debug("Sent heartbeat ping")
+                pong_msg = self._encoder.encode({"action": "pong"})
+                await self._connection.send(pong_msg)
+                logger.debug("Sent heartbeat pong")
                 await asyncio.sleep(self.heartbeat_interval)
             except Exception as e:
                 logger.error(f"Heartbeat error: {e}")
