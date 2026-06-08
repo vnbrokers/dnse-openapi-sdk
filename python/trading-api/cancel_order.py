@@ -18,7 +18,7 @@ def main():
         account_no=os.getenv("DNSE_ACCOUNT_NO"),
         order_id="801",
         market_type="STOCK",
-        trading_token="replace-with-trading-token",
+        trading_token=os.getenv("DNSE_TRADING_TOKEN"),
         order_category="NORMAL",
         dry_run=False,
     )

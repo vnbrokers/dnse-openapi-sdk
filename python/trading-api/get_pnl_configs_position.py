@@ -14,18 +14,9 @@ def main():
         base_url="https://openapi.dnse.com.vn",
     )
 
-    payload = {
-        "price": 12500,
-        "quantity": 100,
-    }
-
-    status, body = client.put_order(
-        account_no=os.getenv("DNSE_ACCOUNT_NO"),
-        order_id="511",
-        market_type="STOCK",
-        payload=payload,
-        trading_token=os.getenv("DNSE_TRADING_TOKEN"),
-        order_category="NORMAL",
+    status, body = client.get_pnl_configs_position(
+        position_id="replace-with-position-id",
+        market_type="DERIVATIVE",
         dry_run=False,
     )
     print(status, body)

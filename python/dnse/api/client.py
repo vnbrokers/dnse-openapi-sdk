@@ -383,6 +383,27 @@ class DNSEClient:
             dry_run=dry_run,
         )
 
+    def get_pnl_configs_position(self, position_id, market_type, dry_run=False):
+        query = {"marketType": market_type}
+        return self._request(
+            "GET",
+            f"/accounts/positions/{position_id}/pnl-configs",
+            query=query,
+            dry_run=dry_run,
+        )
+
+    def post_pnl_configs_position(self, position_id, market_type, trading_token, payload, dry_run=False):
+        headers = {"trading-token": trading_token}
+        query = {"marketType": market_type}
+        return self._request(
+            "POST",
+            f"/accounts/positions/{position_id}/pnl-configs",
+            query=query,
+            body=payload,
+            headers=headers,
+            dry_run=dry_run,
+        )
+
     def _request(self, method, path, query=None, body=None, headers=None, dry_run=False):
         debug = os.getenv("DEBUG", "").lower() == "true"
         url = self._build_url(path, query)

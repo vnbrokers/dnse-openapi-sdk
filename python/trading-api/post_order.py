@@ -27,7 +27,7 @@ def main():
     status, body = client.post_order(
         market_type="STOCK",
         payload=payload,
-        trading_token="replace-with-trading-token",
+        trading_token=os.getenv("DNSE_TRADING_TOKEN"),
         order_category="NORMAL",
         dry_run=False,
     )

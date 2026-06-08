@@ -113,6 +113,9 @@ python trading-api/get_accounts.py
 | `post_order.py`           | Demonstrates how to submit a new trading order.                                                                       |
 | `cancel_order.py`         | Demonstrates how to cancel an existing order.                                                                         |
 | `replace_order.py`        | Demonstrates how to modify an existing order.                                                                         |
+| `get_pnl_configs_position.py`        | Demonstrates how to retrieve all PNL configs of a position.                                                |
+| `post_pnl_configs_position.py`       | Demonstrates how to setup a PNL config the existing position.                                              |
+
 
 #### Market Data API
 

@@ -17,7 +17,7 @@ def main():
     status, body = client.close_position(
         position_id="replace-with-position-id",
         market_type="DERIVATIVE",
-        trading_token="replace-with-trading-token",
+        trading_token=os.getenv("DNSE_TRADING_TOKEN"),
         dry_run=False,
     )
     print(status, body)
