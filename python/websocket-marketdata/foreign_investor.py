@@ -19,7 +19,7 @@ from dnse.websocket.models import ForeignInvestor
 
 async def main():
     # Initialize client
-    encoding = "json"  # json or msgpack
+    encoding = "msgpack"  # json or msgpack
     client = TradingClient(
         api_key=os.getenv("DNSE_API_KEY"),
         api_secret=os.getenv("DNSE_API_SECRET"),
