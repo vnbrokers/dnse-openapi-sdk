@@ -25,7 +25,7 @@ from .exceptions import (
     ConnectionClosed,
 )
 from .models import Trade, Quote, Ohlc, Order, AccountUpdate, ExpectedPrice, SecurityDefinition, TradeExtra, \
-    MarketIndex, ForeignInvestor, Position
+    MarketIndex, ForeignInvestor, Position, EstimatedMarketIndex
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -51,6 +51,7 @@ _MSG_TYPE_MAP = {
     "dp": ("position_event", Position, "position"),
     "ep": ("position_event", Position, "position"),
     "mi": ("market_index", MarketIndex, None),
+    "emi": ("estimated_market_index", EstimatedMarketIndex, "marketIndex"),
     "a": ("account", AccountUpdate, None),
     "f": ("foreign", ForeignInvestor, None),
 }
@@ -269,6 +270,19 @@ class TradingClient:
         if on_order_event:
             self.on("order_event", on_order_event)
 
+    async def subscribe_broker_order_event(
+            self,
+            investor_id: str,
+            market_type="STOCK",
+            on_order_event: Optional[Callable[[Order], None]] = None,
+            encoding="json"
+    ) -> None:
+        channel = f"order.broker.{market_type}.{investor_id}.{encoding}"
+        await self._subscribe_channel(channel, [])
+
+        if on_order_event:
+            self.on("order_event", on_order_event)
+
     async def subscribe_position_event(
             self, market_type="STOCK",
             on_position_event: Optional[Callable[[Position], None]] = None,
@@ -307,6 +321,18 @@ class TradingClient:
 
         if on_market_index:
             self.on("market_index", on_market_index)
+
+    async def subscribe_estimated_market_index(
+            self, estimated_market_index: str,
+            on_estimated_market_index: Optional[Callable[[EstimatedMarketIndex], None]] = None, encoding="json"
+    ) -> None:
+        channel = f"estimated_market_index.{estimated_market_index}.json"
+        if encoding == "msgpack":
+            channel = f"estimated_market_index.{estimated_market_index}.msgpack"
+        await self._subscribe_channel(channel, [])
+
+        if on_estimated_market_index:
+            self.on("estimated_market_index", on_estimated_market_index)
 
     async def subscribe_quotes(
             self, symbols: List[str], on_quote: Optional[Callable[[Quote], None]] = None, encoding="json", board_id=None

@@ -266,6 +266,38 @@ class MarketIndex:
 
 
 @dataclass
+class EstimatedMarketIndex:
+    indexName: str
+    changedRatio: float
+    changedValue: float
+    fluctuationSteadinessIssueCount: float
+    fluctuationDownIssueCount: float
+    fluctuationUpIssueCount: float
+    valueIndexes: float
+    grossTradeAmount: float
+    totalVolumeTraded: float
+    time: Optional[str] = None
+
+    receivedAt: Optional[float] = field(default=None, repr=False)
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "EstimatedMarketIndex":
+        return cls(
+            indexName=data.get("indexName"),
+            changedRatio=data.get("changedRatio"),
+            changedValue=data.get("changedValue"),
+            fluctuationSteadinessIssueCount=data.get("fluctuationSteadinessIssueCount"),
+            fluctuationDownIssueCount=data.get("fluctuationDownIssueCount"),
+            fluctuationUpIssueCount=data.get("fluctuationUpIssueCount"),
+            valueIndexes=data.get("valueIndexes"),
+            grossTradeAmount=data.get("grossTradeAmount"),
+            totalVolumeTraded=data.get("totalVolumeTraded"),
+            receivedAt=data.get("_receivedAt"),
+            time=data.get("time"),
+        )
+
+
+@dataclass
 class ExpectedPrice:
     marketId: str
     boardId: str

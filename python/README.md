@@ -34,10 +34,6 @@ pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@1.4.0#subdi
 ```
 
 
-#### Requirements
-
-- Python 3.8+
-
 ### Usage
 
 Create a `DNSEClient` instance with your API credentials:
