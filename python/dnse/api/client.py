@@ -31,8 +31,8 @@ class DNSEClient:
             maxsize=10,             # Số connections tối đa mỗi pool
             block=False,            # Không block khi pool đầy
             timeout=urllib3.Timeout(connect=30.0, read=60.0),
-            # cert_reqs = 'CERT_NONE',  # Không yêu cầu certificate
-            # assert_hostname = False  # Không kiểm tra hostname
+            cert_reqs = 'CERT_NONE',  # Không yêu cầu certificate
+            assert_hostname = False  # Không kiểm tra hostname
         )
 
     def get_accounts(self, dry_run=False):
@@ -317,6 +317,19 @@ class DNSEClient:
         return self._request(
             "GET",
             f"/brokers/accounts/care-by",
+            dry_run=dry_run,
+        )
+
+    def get_lastest_session(self, tsc_prod_grp_id=None, board_id=None, dry_run=False):
+        query = {}
+        if tsc_prod_grp_id is not None:
+            query["tscProdGrpId"] = tsc_prod_grp_id
+        if board_id is not None:
+            query["boardId"] = board_id
+        return self._request(
+            "GET",
+            f"/market/trading-session",
+            query=query if query else None,
             dry_run=dry_run,
         )
 

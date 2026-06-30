@@ -25,7 +25,7 @@ from .exceptions import (
     ConnectionClosed,
 )
 from .models import Trade, Quote, Ohlc, Order, AccountUpdate, ExpectedPrice, SecurityDefinition, TradeExtra, \
-    MarketIndex, ForeignInvestor, Position, EstimatedMarketIndex
+    MarketIndex, ForeignInvestor, Position, EstimatedMarketIndex, Session
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -54,6 +54,7 @@ _MSG_TYPE_MAP = {
     "emi": ("estimated_market_index", EstimatedMarketIndex, "marketIndex"),
     "a": ("account", AccountUpdate, None),
     "f": ("foreign", ForeignInvestor, None),
+    "s": ("session", Session, None),
 }
 
 
@@ -294,6 +295,19 @@ class TradingClient:
         if on_position_event:
             self.on("position_event", on_position_event)
 
+    async def subscribe_broker_position_event(
+            self,
+            investor_id: str,
+            market_type="STOCK",
+            on_position_event: Optional[Callable[[Position], None]] = None,
+            encoding="json"
+    ) -> None:
+        channel = f"position.broker.{market_type}.{investor_id}.{encoding}"
+        await self._subscribe_channel(channel, [])
+
+        if on_position_event:
+            self.on("position_event", on_position_event)
+
     async def subscribe_sec_def(
             self, symbols: List[str], on_sec_def: Optional[Callable[[SecurityDefinition], None]] = None,
             encoding="json", board_id=None
@@ -383,6 +397,21 @@ class TradingClient:
 
         if on_ohlc:
             self.on("ohlc", on_ohlc)
+
+    async def subscribe_session(
+            self,
+            product_group_id: str,
+            board_id: str = "*",
+            on_session: Optional[Callable[[Session], None]] = None, encoding="json"
+    ) -> None:
+        channel = f"session.{product_group_id}.{board_id}.json"
+
+        if encoding == "msgpack":
+            channel = f"session.{product_group_id}.{board_id}.msgpack"
+        await self._subscribe_channel(channel, [])
+
+        if on_session:
+            self.on("session", on_session)
 
     async def subscribe_ohlc_closed(
             self,
