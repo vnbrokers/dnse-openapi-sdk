@@ -4,6 +4,7 @@ Position event subscription example.
 This example shows how to receive real-time customer's position events of broker for stock and derivative
 """
 
+import os
 import asyncio
 from datetime import datetime
 
@@ -13,10 +14,10 @@ from dnse.websocket.models import Position
 
 async def main():
     # Initialize client
-    encoding = "json"  # json or msgpack
+    encoding = "msgpack"  # json or msgpack
     client = TradingClient(
-        api_key="api-key",
-        api_secret="api-secret",
+        api_key=os.getenv("DNSE_API_KEY"),
+        api_secret=os.getenv("DNSE_API_SECRET"),
         base_url="wss://ws-openapi.dnse.com.vn",
         encoding=encoding,
         )
@@ -33,7 +34,7 @@ async def main():
     print("Subscribing to position event")
     # market_type: DERIVATIVE | STOCK
     await client.subscribe_broker_position_event(
-        investor_id="your-customer-investor-id",
+        investor_id=os.getenv("DNSE_CUSTOMER_INVESTOR_ID"),
         market_type="STOCK",
         on_position_event=handle_position, encoding=encoding)
 

@@ -24,7 +24,7 @@ and investment applications.
 Using `pip`
 ```bash
 
-pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@1.4.3#subdirectory=python
+pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@1.4.4#subdirectory=python
 
 ## install latest version
 # pip install -U git+https://github.com/vnbrokers/dnse-openapi-sdk.git@main#subdirectory=python
@@ -68,11 +68,16 @@ client.get_accounts(dry_run=True)
 
 Run any example from the `dnse-openapi-sdk/python` directory:
 
-bash/zsh/fish
+bash/zsh
 
 ```bash
+# Disable bash/zsh command history for this session
+unset HISTFILE
+set +o history
 
-export PYTHONPATH="."
+## Required when using the git clone installation method
+# export PYTHONPATH="."
+
 export DNSE_API_KEY="replace-with-api-key"
 export DNSE_API_SECRET="replace-with-api-secret"
 
@@ -82,6 +87,13 @@ python trading-api/get_accounts.py
 powershell
 
 ```powershell
+
+# Disable PowerShell command history for this session
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
+
+## Required when using the git clone installation method
+# $env:PYTHONPATH="."
+
 $env:DNSE_API_KEY = "replace-with-api-key"
 $env:DNSE_API_SECRET = "replace-with-api-secret"
 
