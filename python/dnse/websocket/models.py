@@ -82,6 +82,7 @@ class Trade:
     openPrice: float
     tradingSessionId: int
     time: Optional[str] = None
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -100,6 +101,7 @@ class Trade:
             openPrice=data.get("openPrice"),
             tradingSessionId=data.get("tradingSessionId"),
             time=parse_timestamp(data.get("time")),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
@@ -121,6 +123,7 @@ class TradeExtra:
     openPrice: float
     tradingSessionId: int
     time: Optional[str] = None
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -141,6 +144,7 @@ class TradeExtra:
             openPrice=data.get("openPrice"),
             tradingSessionId=data.get("tradingSessionId"),
             time=parse_timestamp(data.get("time")),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
@@ -166,6 +170,7 @@ class ForeignInvestor:
 
     foreignerOrderLimitQuantity: int
     foreignerBuyPossibleQuantity: int
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -187,6 +192,7 @@ class ForeignInvestor:
             totalBuyTradedAmount=data.get("totalBuyTradedAmount"),
             foreignerOrderLimitQuantity=data.get("foreignerOrderLimitQuantity"),
             foreignerBuyPossibleQuantity=data.get("foreignerBuyPossibleQuantity"),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
@@ -227,7 +233,7 @@ class MarketIndex:
     marketId: int
     tradingSessionId: int
     transactTime: Optional[str] = None
-
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -260,6 +266,7 @@ class MarketIndex:
             marketId=data.get("marketId"),
             tradingSessionId=data.get("tradingSessionId"),
             transactTime=parse_timestamp(data.get("transactTime")),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
@@ -484,6 +491,7 @@ class Quote:
     totalOfferQtty: float
     totalBidQtty: float
     time: Optional[str] = None
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -506,6 +514,7 @@ class Quote:
             totalOfferQtty=data.get("totalOfferQtty"),
             totalBidQtty=data.get("totalBidQtty"),
             time=parse_timestamp(data.get("time")),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
@@ -575,6 +584,7 @@ class Session:
     tradingSessionId: int
     tscProdGrpId: str
     time: Optional[str] = None
+    multicastReceiveTime: Optional[str] = None
     receivedAt: Optional[float] = field(default=None, repr=False)
 
     @classmethod
@@ -586,6 +596,7 @@ class Session:
             tradingSessionId=data.get("tradingSessionId", 0),
             tscProdGrpId=data.get("tscProdGrpId", ""),
             time=parse_timestamp(data.get("sendingTime")),
+            multicastReceiveTime=parse_timestamp(data.get("multicastReceiveTime")),
             receivedAt=data.get("_receivedAt"),
         )
 
